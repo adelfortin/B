@@ -1,0 +1,247 @@
+alias web="cd /home/stag/www/html"
+### Simple aliases (pour lancer les aliases taper refresh puis refresh aliases)
+alias refreshaliases="source ~/.aliases"
+alias refresh2="source ~/.zshrc"
+alias refresh="source ~/.bashrc"
+alias bc='bc -l'
+
+### PREPA POUR L'EXAMEN
+alias inject="bash ~/PREPA_EXAMEN/injectv8.1.sh"
+alias tldr="bash ~/PREPA_EXAMEN/tldr.sh"
+alias generate="bash ~/PREPA_EXAMEN/script-UC.sh"
+alias ungenerate="rm -r scripts_bash"
+alias finalize="mv /media/sf_temp/EPREUVE_LINUX/scripts_bash/questions.sql /media/sf_temp/EPREUVE_LINUX/scripts_bash/questions.txt"
+alias franfind="bash ~/PREPA_EXAMEN/find_wrapper.sh"
+
+### Date et Heure
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+
+
+### VIM
+alias vi=vim
+alias svi='sudo vi'
+alias vis='vim "+set si"'
+alias edit='vim'
+
+
+### alias pour Bash/Terminal
+alias c="clear"
+alias cls="clear"
+
+
+### Pour passer Root
+alias root='sudo -i'
+alias su='sudo -i'
+
+
+### Informations sur le Harware
+## pass options to free ##
+alias meminfo='free -m -l -t'
+ 
+## Pour obtenir les process utilisant le plus de memoire
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+ 
+## Pour obtenir les process utilisant le plus de memoire
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+ 
+## Information CPU du server
+alias cpuinfo='lscpu'
+ 
+## Pour les vieux systemes /proc/cpuinfo ##
+##alias cpuinfo='less /proc/cpuinfo' ##
+ 
+## Obtenir la ram utilisé par la carte graphique / laptop##
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+
+
+### reboot / halt / eteindre
+alias reboot="sudo /sbin/reboot"
+alias poweroff="sudo /sbin/poweroff"
+alias halt="sudo /sbin/halt"
+alias shutdown="sudo /sbin/shutdown"
+
+
+### Protection pour éviter les supressions douloureuses
+alias rm="rm -i"
+
+## commandes apt pour (ubuntu)
+alias update='sudo apt-get update'
+alias upgrade='sudo apt-get upgrade'
+alias upgradedist='sudo apt-get dist-upgrade'
+alias miseàjour='agu && agg && agd'
+alias install='sudo apt install'
+alias delete='sudo apt-get remove'
+alias findpkg='apt-cache search'
+
+## commandes pacman (pour archlinux)
+#alias update="sudo pacman -Syyuu"
+#alias install="sudo pacman -S"
+#alias delete="sudo pacman -R"
+#alias purge="sudo pacman -R"
+#alias forcepurge="sudo pacman -Rsu"
+#alias superpurge="sudo pacman -Rsc"
+#alias searchpkg="sudo pacman -Ssq | grep --color=auto"
+#alias searchpkgi="sudo pacman -Ssq | grep --color=auto"
+#alias findpkg="sudo pacman -Qq | grep --color=auto"
+
+
+## yay commands (pour archlinux avec yay pour les paquets AUR)
+#alias ynstall="yay -S"
+#alias unynstall="yay -S"
+
+
+## run script perso
+##alias run="./${1}"
+alias start="sh ~/.config/matrix/firstinstallscript/starter"
+alias configblue="sh ~/.config/matrix/configblue"
+alias configpurple="sh ~/.config/matrix/configpurple"
+alias gitinit="sh ~/.config/matrix/workingscript/gitinit"
+alias gitinitMD="sh ~/.config/matrix/workingscript/gitinitMD"
+alias gitpush="sh ~/.config/matrix/workingscript/gitpush"
+alias clean-chromium-cache="rm -Rf ~/.cache/chromium/Default/Cache"
+alias clean-midori-cache="rm -Rf ~/.cache/midori/Default/Cache"
+alias clean-luakit-cache="rm -Rf ~/.cache/luakit/Default/Cache"
+alias ls='ls --color=auto'
+alias ll='ls -la'
+alias l.='ls -d .* --color=auto'
+
+
+## Pour lancer lynx avec une config perso
+alias lynx="lynx -lss altopaque.lss"
+alias calculator='gnome-calculator'
+# Sort files by size
+alias lt='ls --human-readable --size -1 -S --classify'
+
+
+### Repertoires
+# See Previous Directories
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+
+## Pour les habitués de windows et de sa fenêtre de commande
+##alias /="cd"
+alias DIR="cd"
+alias Dir="cd"
+alias Dir="cd"
+alias DIr="cd"
+alias DiR="cd"
+alias dir="cd"
+alias diR="cd"
+alias dIr="cd"
+alias dIR="cd"
+alias CD="cd"
+alias cD="cd"
+alias Cd="cd"
+
+## Options de montages de disque dur
+# Voir uniquement les disques dur montés
+alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
+
+
+### Commandes pour Grep
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+##alias mount='mount |column -t'
+alias h='history'
+alias j='jobs -l'
+alias myip='curl ipinfo.io/ip'
+alias left='ls -t -1'
+alias count='find . -type f | wc -l'
+alias gh='history | grep'
+# Add a copy file progress bar
+alias cpv='rsync -ah --info=progress2'
+# Stop after sending count ECHO_REQUEST packets #
+alias ping='ping -c 5'
+# Do not wait interval 1 second, go fast #
+alias fastping="ping -c 100 -s2"
+# Create a Python codexx environement
+alias ve='python3 -m venv ./venv'
+alias va='source ./venv/bin/activate'
+
+
+###Fonctions
+mkcd ()
+{
+  mkdir -p -- "$1" && cd -P -- "$1"
+}
+
+# Si l'utilisateur n'est pas root, passe tout les commandes en sudo
+if [ $UID -ne 0 ]; then
+    alias reboot='sudo reboot'
+fi
+
+# fonction pour afficher le contenu du dossier dans lequel vous vous deplacer
+function cdls() {
+    DIR="$*";
+        # sans repertoir préciser on se déplace dans le home
+        if [ $# -lt 1 ]; then
+                DIR=$HOME;
+    fi;
+    builtin cd "${DIR}" && \
+    # oprions d ela commande ls
+        ls -F --color=auto
+}  
+
+#ouvre en mode no un programme
+open ()
+{
+  sudo nohup $1 &
+}
+
+# fais un backup d'un fichier dans un dossier situé dans home ~/BACKUP (qui doit exister avant), ensuite il ouvre le fichier dans vim
+bedit () {
+    cp -i "$1" "$HOME/Backup/"$1"" &&
+    vim "$1"
+}
+
+run ()
+{
+	local script="$1"
+	shift
+	./$script "$@"
+
+}
+
+debug ()
+{
+	local script="$1"
+	shift
+	bash -x $script "$@"
+}
+
+toush ()
+{
+	local script="$1"
+	touch "${script}.sh"
+	chmod 755 "${script}.sh" 
+}
+
+voush ()
+{
+	local script="$1"
+	touch "${script}.sh"
+	chmod 755 "${script}.sh"
+	vim "${script}.sh" 
+}
+
+goush ()
+{
+	local script="$1"
+	touch "${script}.sh"
+	chmod 755 "${script}.sh"
+	geany "${script}.sh" 
+}
+
+
